@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Kreeda-Ankana | Village Sports Ground Organizer</title>
+  <meta name="description" content="Kreeda-Ankana — Digital sports coordination platform for villages. Book grounds, challenge teams, track scores.">
+  <meta name="theme-color" content="#2E7D32">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ==================== SPLASH SCREEN ==================== -->
+  <div id="splash-screen">
+    <span class="material-icons-round splash-icon">sports_cricket</span>
+    <div class="splash-title">Kreeda-Ankana</div>
+    <div class="splash-tagline">Your Village. Your Ground. Your Game.</div>
+    <div class="splash-loader">
+      <div class="splash-loader-bar"></div>
+    </div>
+  </div>
+
+  <!-- ==================== MAIN APP ==================== -->
+  <div id="app">
+
+    <!-- ===== TOP APP BAR ===== -->
+    <header id="top-bar">
+      <div class="bar-title" id="bar-title">🏟️ Ground Calendar</div>
+      <button class="bar-icon material-icons-round" id="dark-mode-toggle" title="Toggle Dark Mode">dark_mode</button>
+    </header>
+
+    <!-- ===== CONTENT VIEWS ===== -->
+    <main id="content">
+
+      <!-- === VIEW: CALENDAR === -->
+      <section id="view-calendar" class="view active">
+        <div class="section-title">
+          <span class="material-icons-round icon">calendar_month</span>
+          Ground Calendar
+        </div>
+
+        <!-- Sport Filter -->
+        <div class="toggle-group sport-toggle" style="margin-bottom:16px;">
+          <button class="toggle-btn active" data-sport="Cricket">🏏 Cricket</button>
+          <button class="toggle-btn" data-sport="Volleyball">🏐 Volleyball</button>
+        </div>
+
+        <!-- Week Navigation -->
+        <div class="calendar-header">
+          <div class="calendar-nav">
+            <button id="cal-prev" title="Previous Week"><span class="material-icons-round">chevron_left</span></button>
+            <button id="cal-today" title="Today" style="border-radius:8px;width:auto;padding:0 12px;font-size:0.7rem;font-weight:600;">Today</button>
+            <button id="cal-next" title="Next Week"><span class="material-icons-round">chevron_right</span></button>
+          </div>
+          <h2 id="cal-week-label">Loading...</h2>
+        </div>
+
+        <!-- Calendar Grid -->
+        <div class="calendar-grid" id="calendar-grid">
+          <div class="loading"><div class="spinner"></div></div>
+        </div>
+
+        <!-- Legend -->
+        <div class="cal-legend">
+          <div class="cal-legend-item"><div class="cal-legend-dot green"></div> Available</div>
+          <div class="cal-legend-item"><div class="cal-legend-dot red"></div> Booked / Past</div>
+        </div>
+      </section>
+
+      <!-- === VIEW: BOOKING === -->
+      <section id="view-booking" class="view">
+        <div class="booking-header">
+          <button class="back-btn" id="booking-back">
+            <span class="material-icons-round">arrow_back</span>
+          </button>
+          <div>
+            <div class="section-title" style="margin-bottom:0;">Book a Slot</div>
+          </div>
+        </div>
+
+        <div class="booking-slot-info">
+          <div class="date" id="booking-date-display">—</div>
+          <div class="time" id="booking-time-display">—</div>
+        </div>
+
+        <form id="booking-form">
+          <input type="hidden" id="booking-date-input">
+
+          <div class="form-group">
+            <label class="form-label">Team Name</label>
+            <input type="text" class="form-input" id="booking-team-name" placeholder="Enter your team name" maxlength="40">
+            <div class="form-error" id="booking-team-error"></div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Sport</label>
+            <div class="toggle-group booking-sport-toggle">
+              <button type="button" class="toggle-btn active" data-sport="Cricket">🏏 Cricket</button>
+              <button type="button" class="toggle-btn" data-sport="Volleyball">🏐 Volleyball</button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="booking-submit" style="width:100%;justify-content:center;padding:14px;font-size:0.95rem;">
+            <span class="material-icons-round">check_circle</span> Confirm Booking
+          </button>
+        </form>
+      </section>
+
+      <!-- === VIEW: CHALLENGE BOARD === -->
+      <section id="view-challenges" class="view">
+        <div class="section-title">
+          <span class="material-icons-round icon">sports_kabaddi</span>
+          Challenge Board
+        </div>
+        <div id="challenges-list">
+          <div class="loading"><div class="spinner"></div></div>
+        </div>
+      </section>
+
+      <!-- === VIEW: SCORE WALL === -->
+      <section id="view-scores" class="view">
+        <div class="section-title">
+          <span class="material-icons-round icon">emoji_events</span>
+          Score Wall
+        </div>
+        <div id="scores-list">
+          <div class="loading"><div class="spinner"></div></div>
+        </div>
+      </section>
+
+      <!-- === VIEW: TEAM PROFILE === -->
+      <section id="view-team" class="view">
+        <div class="section-title">
+          <span class="material-icons-round icon">groups</span>
+          Team Profile
+        </div>
+
+        <!-- Empty State -->
+        <div id="team-empty" style="display:none;">
+          <div class="empty-state">
+            <span class="material-icons-round icon">group_add</span>
+            <h3>No Team Created</h3>
+            <p>Create your village team profile to get started!</p>
+            <button class="btn btn-primary" id="team-create-btn" style="margin-top:16px;">
+              <span class="material-icons-round">add</span> Create Team
+            </button>
+          </div>
+        </div>
+
+        <!-- Profile Content -->
+        <div id="team-profile-content" style="display:none;">
+          <!-- Profile Header Card -->
+          <div class="profile-header">
+            <div class="profile-avatar">
+              <span id="profile-avatar-icon">🏏</span>
+            </div>
+            <div class="profile-name" id="profile-team-name">—</div>
+            <div class="profile-captain" id="profile-captain">—</div>
+            <div style="margin-top:8px;" id="profile-sport-chip"></div>
+            <div style="margin-top:4px;font-size:0.8rem;opacity:0.8;" id="profile-players">—</div>
+          </div>
+
+          <!-- Stats -->
+          <div class="profile-stats">
+            <div class="stat-card">
+              <div class="stat-value" id="stat-total">0</div>
+              <div class="stat-label">Matches</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="stat-wins" style="color:var(--available);">0</div>
+              <div class="stat-label">Wins</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="stat-losses" style="color:var(--booked);">0</div>
+              <div class="stat-label">Losses</div>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div id="team-actions" style="display:flex;flex-wrap:wrap;gap:8px;">
+            <button class="btn btn-primary btn-small" id="team-edit-btn">
+              <span class="material-icons-round" style="font-size:16px;">edit</span> Edit
+            </button>
+            <button class="btn btn-outline btn-small" id="team-switch-btn" style="display:none;">
+              <span class="material-icons-round" style="font-size:16px;">swap_horiz</span> Switch Team
+            </button>
+            <button class="btn btn-primary btn-small" id="team-create-btn" style="background:var(--accent);">
+              <span class="material-icons-round" style="font-size:16px;">add</span> New Team
+            </button>
+            <button class="btn btn-danger btn-small" id="team-delete-btn">
+              <span class="material-icons-round" style="font-size:16px;">delete</span> Delete
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ===== FLOATING ACTION BUTTONS ===== -->
+    <button class="fab" id="fab-challenge" style="display:none;" title="Post Challenge">
+      <span class="material-icons-round">add</span>
+    </button>
+    <button class="fab" id="fab-score" style="display:none;" title="Post Result">
+      <span class="material-icons-round">add</span>
+    </button>
+
+    <!-- ===== BOTTOM NAVIGATION ===== -->
+    <nav id="bottom-nav">
+      <button class="nav-item active" data-view="calendar">
+        <span class="material-icons-round icon">calendar_month</span>
+        <span class="label">Calendar</span>
+      </button>
+      <button class="nav-item" data-view="challenges">
+        <span class="material-icons-round icon">sports_kabaddi</span>
+        <span class="label">Challenges</span>
+      </button>
+      <button class="nav-item" data-view="scores">
+        <span class="material-icons-round icon">emoji_events</span>
+        <span class="label">Scores</span>
+      </button>
+      <button class="nav-item" data-view="team">
+        <span class="material-icons-round icon">groups</span>
+        <span class="label">Team</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- ==================== DIALOG OVERLAY ==================== -->
+  <div class="dialog-overlay" id="dialog-overlay">
+    <div class="dialog" id="dialog">
+      <div class="dialog-title" id="dialog-title"></div>
+      <div id="dialog-body"></div>
+      <div class="dialog-actions" id="dialog-actions"></div>
+    </div>
+  </div>
+
+  <!-- ==================== SNACKBAR ==================== -->
+  <div id="snackbar"></div>
+
+  <!-- ==================== FIREBASE (Optional) ==================== -->
+  <!--
+    To enable real-time Challenge Board sync, uncomment the lines below
+    and replace with your Firebase project config.
+    See README.md for setup instructions.
+  -->
+  <!--
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      databaseURL: "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
+      projectId: "YOUR_PROJECT",
+      storageBucket: "YOUR_PROJECT.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    });
+  </script>
+  -->
+
+  <!-- ==================== APP SCRIPTS ==================== -->
+  <script src="js/db.js"></script>
+  <script src="js/calendar.js"></script>
+  <script src="js/booking.js"></script>
+  <script src="js/challenge.js"></script>
+  <script src="js/score.js"></script>
+  <script src="js/team.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

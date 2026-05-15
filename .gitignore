@@ -1,0 +1,89 @@
+# ============================================================
+#  Kreeda-Ankana — Android .gitignore
+#  Auto-generated for production GitHub deployment
+# ============================================================
+
+# ----------------------------
+# Android Studio / IntelliJ IDEA
+# ----------------------------
+*.iml
+.idea/
+!.idea/codeStyles/
+!.idea/copyright/
+.gradle/
+.kotlin/
+captures/
+.externalNativeBuild/
+.cxx/
+*.ap_
+*.dex
+
+# ----------------------------
+# Build outputs (NEVER commit)
+# ----------------------------
+/build/
+app/build/
+**/build/
+out/
+
+# ----------------------------
+# APK / AAB files at root level
+# ----------------------------
+*.apk
+*.aab
+
+# ----------------------------
+# Local machine properties
+# (contains SDK path – differs per machine)
+# ----------------------------
+local.properties
+
+# ----------------------------
+# Keystore & signing secrets
+# (NEVER commit — security risk)
+# ----------------------------
+*.jks
+*.keystore
+keystore.properties
+signing.properties
+
+# ----------------------------
+# Google Services / Firebase
+# (contains API keys – keep private if needed,
+#  but for student projects it's OK to commit)
+# ----------------------------
+# google-services.json   ← uncomment to exclude
+
+# ----------------------------
+# macOS metadata
+# ----------------------------
+.DS_Store
+
+# ----------------------------
+# Windows metadata
+# ----------------------------
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ----------------------------
+# Proguard mapping (generated)
+# ----------------------------
+app/release/output-metadata.json
+
+# ----------------------------
+# Lint outputs
+# ----------------------------
+lint-baseline.xml
+*.lint.xml
+
+# ----------------------------
+# Test & coverage reports
+# ----------------------------
+.jacoco/
+jacocoHtml/
+
+# ----------------------------
+# Crash / log files
+# ----------------------------
+*.log
